@@ -15,8 +15,20 @@ export default async function handler(req, res) {
       'https://dev-f7q4qmy5zahp17uf.us.auth0.com/userinfo',
       { headers: { Authorization: auth } }
     );
+    
     console.log('✅ Received userinfo from IdP:', data);
-    return res.status(200).json(data);
+
+    // Transformar respuesta para Clerk
+    const transformed = {
+      sub: data.sub,
+      email_address: data.email,  // Clerk lo requiere como email_address
+      email_verified: data.email_verified ?? true,
+      name: data.name || `${data.given_name || ''} ${data.family_name || ''}`.trim(),
+    };
+
+    console.log('📦 Transformed userinfo:', transformed);
+
+    return res.status(200).json(transformed);
   } catch (err) {
     console.error('🚨 Error fetching userinfo:', err.message);
     return res.status(500).json({ error: 'Failed to fetch userinfo' });
