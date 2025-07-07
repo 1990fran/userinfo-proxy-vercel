@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     // Transformar respuesta para Clerk
     const transformed = {
       sub: data.sub,
-      email_address: data.email ?? 'fran19905@example.com',  // Clerk lo requiere como email_address
+      email: data.email ?? 'fran19905@example.com',  // Clerk lo requiere como email_address
       email_verified: data.email_verified ?? true,
       name: data.name || `${data.given_name || ''} ${data.family_name || ''}`.trim(),
     };
