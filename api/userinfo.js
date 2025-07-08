@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   try {
     const { data } = await axios.get(
-      'https://dev-f7q4qmy5zahp17uf.us.auth0.com/userinfo',
+      'https://auth.nyu.edu/oauth2/userinfo',
       { headers: { Authorization: auth } }
     );
     
@@ -21,9 +21,9 @@ export default async function handler(req, res) {
     // Transformar respuesta para Clerk
     const transformed = {
       sub: data.sub,
-      email: data.email ?? 'fran19905@example.com',  // Clerk lo requiere como email_address
+      email: data.email ,
       email_verified: data.email_verified ?? true,
-      name: data.name || `${data.given_name || ''} ${data.family_name || ''}`.trim(),
+      name: data.firstname || `${data.given_name || ''} ${data.family_name || ''}`.trim(),
     };
 
     console.log('📦 Transformed userinfo:', transformed);
