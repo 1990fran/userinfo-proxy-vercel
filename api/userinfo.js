@@ -9,10 +9,11 @@ export default async function handler(req, res) {
     console.log('❌ No Authorization header');
     return res.status(401).json({ error: 'Missing Authorization header' });
   }
-
+ //https://auth.nyu.edu/oauth2/userinfo
+ //https://dev-f7q4qmy5zahp17uf.us.auth0.com/userinfo 
   try {
     const { data } = await axios.get(
-      'https://auth.nyu.edu/oauth2/userinfo',
+      'https://dev-f7q4qmy5zahp17uf.us.auth0.com/userinfo',
       { headers: { Authorization: auth } }
     );
     
