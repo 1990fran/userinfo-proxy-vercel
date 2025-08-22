@@ -13,7 +13,7 @@ export default async function handler(req, res) {
  //https://dev-f7q4qmy5zahp17uf.us.auth0.com/userinfo 
   try {
     const { data } = await axios.get(
-      'https://dev-f7q4qmy5zahp17uf.us.auth0.com/userinfo',
+      'https://auth.nyu.edu/oauth2/userinfo',
       { headers: { Authorization: auth } }
     );
     
