@@ -21,16 +21,16 @@ export default async function handler(req, res) {
     console.log('✅ Received userinfo from IdP:', data);
 
     // Transformar respuesta para Clerk
-    const transformed = {
+    /*const transformed = {
       sub: data.sub,
       email: data.email ,
       email_verified: data.email_verified ?? true,
       name: data.firstname || `${data.given_name || ''} ${data.family_name || ''}`.trim(),
-    };
+    };*/
 
-    console.log('📦 Transformed userinfo:', transformed);
+    console.log('📦 Transformed userinfo:', data);
 
-    return res.status(200).json(transformed);
+    return res.status(200).json(data);
   } catch (err) {
     console.error('🚨 Error fetching userinfo:', err.message);
     return res.status(500).json({ error: 'Failed to fetch userinfo' });
